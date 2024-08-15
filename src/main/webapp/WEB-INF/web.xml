@@ -1,34 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:web="http://xmlns.jcp.org/xml/ns/javaee">
   <display-name>Archetype Created Web Application</display-name>
-  <servlet>
-    <description></description>
-    <display-name>ViewUserServlet</display-name>
-    <servlet-name>ViewUserServlet</servlet-name>
-    <servlet-class>com.newtest.controller.ViewUserServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ViewUserServlet</servlet-name>
-    <url-pattern>/ViewUserServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>AddUserServlet</display-name>
-    <servlet-name>AddUserServlet</servlet-name>
-    <servlet-class>com.newtest.controller.AddUserServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AddUserServlet</servlet-name>
-    <url-pattern>/AddUserServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>DatabaseInitServlet</display-name>
-    <servlet-name>DatabaseInitServlet</servlet-name>
-    <servlet-class>com.newtest.utility.DatabaseInitServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>DatabaseInitServlet</servlet-name>
-    <url-pattern>/DatabaseInitServlet</url-pattern>
-  </servlet-mapping>
+      <servlet>
+        <servlet-name>DatabaseInitServlet</servlet-name>
+        <servlet-class>com.newtest.utility.DatabaseInitServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>	
 </web-app>

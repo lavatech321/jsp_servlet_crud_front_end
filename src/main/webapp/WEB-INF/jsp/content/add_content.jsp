@@ -1,20 +1,25 @@
+  
+  
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
             <h1 class="h2">New Employee</h1>
   </div>
   
         <div class="col-md-8 order-md-1">
-          <form class="needs-validation" novalidate>
+        
+        
+          <form action="/newtest/add" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+          <jsp:useBean id="bean" class="com.newtest.bean.EmployeeBean" scope="request"></jsp:useBean>
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="firstName">First name</label>
-                <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                <input type="text" class="form-control" id="fname" placeholder="" value="" required>
                 <div class="invalid-feedback">
                   Valid first name is required.
                 </div>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="lastName">Last name</label>
-                <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                <input type="text" class="form-control" id="lname" placeholder="" value="" required>
                 <div class="invalid-feedback">
                   Valid last name is required.
                 </div>
@@ -51,16 +56,16 @@
             </div>
 
             <div class="mb-3">
-              <label for="address2">Contact number </label>
-              <input type="text" class="form-control" id="address2" placeholder="10 digit number">
+              <label for="phno">Contact number </label>
+              <input type="text" class="form-control" id="phno" placeholder="10 digit number">
             </div>
 
             <div class="row">
               <div class="col-md-5 mb-3">
                 <label for="country">Country</label>
                 <select class="custom-select d-block w-100" id="country" required>
-                  <option value="">Choose...</option>
-                  <option>United States</option>
+                  <option value="India">India</option>
+                  <option value="US">United States</option>
                 </select>
                 <div class="invalid-feedback">
                   Please select a valid country.
@@ -69,8 +74,8 @@
               <div class="col-md-4 mb-3">
                 <label for="state">State</label>
                 <select class="custom-select d-block w-100" id="state" required>
-                  <option value="">Choose...</option>
-                  <option>California</option>
+                  <option value="MAH">MAH</option>
+                  <option value="DELHI">DELHI</option>
                 </select>
                 <div class="invalid-feedback">
                   Please provide a valid state.
@@ -86,12 +91,12 @@
             </div>
             <hr class="mb-4">
             <div class="custom-control custom-checkbox">
-              <input type="checkbox" id="same-address">
-              <label for="same-address">Remote</label>
+              <input type="checkbox" id="status1">
+              <label for="status1">Remote</label>
             </div>
             <div class="custom-control custom-checkbox">
-              <input type="checkbox" id="save-info">
-              <label for="save-info">Flexible</label>
+              <input type="checkbox" id="status2">
+              <label for="status2">Flexible</label>
             </div>
             <hr class="mb-4">
 
@@ -111,6 +116,11 @@
                 <label for="paypal">Contract</label>
               </div>
             </div>
+            
+               <div class="custom-file">
+			    <input type="file" class="custom-file-input" id="pic">
+			    <label class="custom-file-label" for="customFile">Upload Profile Picture</label>
+			  </div>
             
             <hr class="mb-4">
             <button class="btn btn-primary" type="submit">Save</button>

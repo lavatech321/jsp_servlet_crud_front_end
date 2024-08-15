@@ -9,8 +9,8 @@ CREATE TABLE IF NOT EXISTS employee (
 	country VARCHAR(100) NOT NULL,
 	state VARCHAR(100) NOT NULL,
 	zip INT NOT NULL,
-	status VARCHAR(25) NOT NULL,
-	jobtype VARCHAR(25) NOT NULL,
+	status VARCHAR(25),
+	jobtype VARCHAR(25),
 	pic blob NOT NULL
 	);
 CREATE TABLE IF NOT EXISTS users (
