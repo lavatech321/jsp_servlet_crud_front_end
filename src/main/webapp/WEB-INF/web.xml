@@ -21,4 +21,14 @@
     <servlet-name>AddUserServlet</servlet-name>
     <url-pattern>/AddUserServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DatabaseInitServlet</display-name>
+    <servlet-name>DatabaseInitServlet</servlet-name>
+    <servlet-class>com.newtest.utility.DatabaseInitServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DatabaseInitServlet</servlet-name>
+    <url-pattern>/DatabaseInitServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

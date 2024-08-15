@@ -14,9 +14,6 @@
 		  </div>
 		</div>
       
-      
-        
-          <a class="nav-link btn-primary" href="<%= request.getContextPath() %>/signup">SignIn</a>
-        
+        <a class="nav-link btn-primary" href="<%= request.getContextPath() %>/signup">SignIn</a>
       
     </nav>
