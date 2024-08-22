@@ -1,17 +1,17 @@
-CREATE TABLE IF NOT EXISTS employee (
-	id INT AUTO_INCREMENT PRIMARY KEY, 
-	fname VARCHAR(35) NOT NULL,
-	lname VARCHAR(35) NOT NULL,
+CREATE TABLE IF NOT EXISTS EMPLOYEE (
+	id INT,
+	fname VARCHAR(35),
+	lname VARCHAR(35),
 	username VARCHAR(35),
-	email VARCHAR(100) NOT NULL,
-	address VARCHAR(100) NOT NULL,
-	phno INT NOT NULL,
-	country VARCHAR(100) NOT NULL,
-	state VARCHAR(100) NOT NULL,
-	zip INT NOT NULL,
-	status VARCHAR(25),
-	jobtype VARCHAR(25),
-	pic blob NOT NULL
+	email VARCHAR(40),
+	address VARCHAR(200),
+	phno VARCHAR(11),
+	country VARCHAR(30),
+	state VARCHAR(30),
+	zip INT,
+	remote TINYINT(1) NOT NULL,
+	jobtype VARCHAR(15),
+	profile BLOB
 	);
 CREATE TABLE IF NOT EXISTS users (
 	id INT AUTO_INCREMENT PRIMARY KEY, 

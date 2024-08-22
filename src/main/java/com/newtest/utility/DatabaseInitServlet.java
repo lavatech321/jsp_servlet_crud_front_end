@@ -35,7 +35,7 @@ public class DatabaseInitServlet extends HttpServlet {
         }
     }
     
-    private void createSchema() throws Exception {
+    private void createSchema() {
         try (Connection conn = JDBCDataSource.getConnection();
              Statement stmt = conn.createStatement();
              InputStream input = getServletContext().getResourceAsStream("/WEB-INF/sql/schema.sql");
@@ -46,7 +46,6 @@ public class DatabaseInitServlet extends HttpServlet {
             while ((line = reader.readLine()) != null) {
                 sql.append(line).append("\n");
             }
-
             // Split SQL script into individual statements
             String[] sqlStatements = sql.toString().split(";");
 
@@ -59,6 +58,9 @@ public class DatabaseInitServlet extends HttpServlet {
             }
 
             System.out.println("Database schema created successfully");
+        }
+        catch (Exception e) {
+        	System.out.println(e.getMessage());
         }
     }
 }

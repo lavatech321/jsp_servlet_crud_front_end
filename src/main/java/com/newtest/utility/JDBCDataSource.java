@@ -56,15 +56,16 @@ public class JDBCDataSource {
             try {
                 connection.close();
             } catch (Exception e) {
+            	System.out.println(e.getMessage());
             }
         }
     }
     
-    public static void main(String[] args) throws Exception {
-    	Connection con = JDBCDataSource.getConnection();
-    	System.out.println(con);
-    	System.out.println("end");
-    	Statement stat = con.createStatement();
+    //public static void main(String[] args) throws Exception {
+    //	Connection con = JDBCDataSource.getConnection();
+    //	System.out.println(con);
+    //	System.out.println("end");
+    //	Statement stat = con.createStatement();
     	//String q1 = "create table test123(no int)";
     	//int result = stat.executeUpdate(q1);
     	//System.out.println(result);
@@ -79,5 +80,5 @@ public class JDBCDataSource {
     	//while(rs.next()) {
     	//	System.out.println(rs.getInt(1));
     	//}
-    }
+    //}
 }

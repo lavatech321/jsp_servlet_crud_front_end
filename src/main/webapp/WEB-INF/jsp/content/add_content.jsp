@@ -5,43 +5,40 @@
   </div>
   
         <div class="col-md-8 order-md-1">
-        
-        
-          <form action="/newtest/add" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
-          <jsp:useBean id="bean" class="com.newtest.bean.EmployeeBean" scope="request"></jsp:useBean>
+          <form action="/newtest/add" method="post" enctype="multipart/form-data">
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="firstName">First name</label>
-                <input type="text" class="form-control" id="fname" placeholder="" value="" required>
+                <input type="text" class="form-control" name="fname" >
                 <div class="invalid-feedback">
                   Valid first name is required.
                 </div>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="lastName">Last name</label>
-                <input type="text" class="form-control" id="lname" placeholder="" value="" required>
+                <input type="text" class="form-control" name="lname">
                 <div class="invalid-feedback">
                   Valid last name is required.
                 </div>
               </div>
             </div>
-
+            
             <div class="mb-3">
               <label for="username">Username</label>
               <div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text">@</span>
                 </div>
-                <input type="text" class="form-control" id="username" placeholder="Username" required>
+                <input type="text" class="form-control" name="username">
                 <div class="invalid-feedback" style="width: 100%;">
                   Your username is required.
                 </div>
               </div>
             </div>
 
-            <div class="mb-3">
+			<div class="mb-3">
               <label for="email">Email <span class="text-muted">(Optional)</span></label>
-              <input type="email" class="form-control" id="email" placeholder="you@example.com">
+              <input type="email" class="form-control" name="email" placeholder="you@example.com">
               <div class="invalid-feedback">
                 Please enter a valid email address for shipping updates.
               </div>
@@ -49,7 +46,7 @@
 
             <div class="mb-3">
               <label for="address">Address</label>
-              <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+              <input type="text" class="form-control" name="address" placeholder="1234 Main St">
               <div class="invalid-feedback">
                 Please enter your shipping address.
               </div>
@@ -57,13 +54,13 @@
 
             <div class="mb-3">
               <label for="phno">Contact number </label>
-              <input type="text" class="form-control" id="phno" placeholder="10 digit number">
+              <input type="text" class="form-control" name="phno" placeholder="10 digit number">
             </div>
-
+            
             <div class="row">
               <div class="col-md-5 mb-3">
                 <label for="country">Country</label>
-                <select class="custom-select d-block w-100" id="country" required>
+                <select class="custom-select d-block w-100" name="country">
                   <option value="India">India</option>
                   <option value="US">United States</option>
                 </select>
@@ -73,7 +70,7 @@
               </div>
               <div class="col-md-4 mb-3">
                 <label for="state">State</label>
-                <select class="custom-select d-block w-100" id="state" required>
+                <select class="custom-select d-block w-100" name="state">
                   <option value="MAH">MAH</option>
                   <option value="DELHI">DELHI</option>
                 </select>
@@ -83,46 +80,45 @@
               </div>
               <div class="col-md-3 mb-3">
                 <label for="zip">Zip</label>
-                <input type="text" class="form-control" id="zip" placeholder="" required>
+                <input type="text" class="form-control" name="zip">
                 <div class="invalid-feedback">
                   Zip code required.
                 </div>
               </div>
             </div>
+            
             <hr class="mb-4">
             <div class="custom-control custom-checkbox">
-              <input type="checkbox" id="status1">
+              <input type="checkbox" name="remote">
               <label for="status1">Remote</label>
             </div>
-            <div class="custom-control custom-checkbox">
-              <input type="checkbox" id="status2">
-              <label for="status2">Flexible</label>
-            </div>
+            
             <hr class="mb-4">
-
+            
             <h4 class="mb-3">Job Type</h4>
 
             <div class="d-block my-3">
               <div class="custom-control custom-radio">
-                <input id="credit" name="paymentMethod" type="radio"  checked required>
-                <label for="credit">Temporary</label>
+                <input value="temporary" name="jobtype" type="radio" required>
+                <label for="temporary">Temporary</label>
               </div>
               <div class="custom-control custom-radio">
-                <input id="debit" name="paymentMethod" type="radio"  required>
-                <label for="debit">Permanent</label>
+                <input value="permanent" name="jobtype" type="radio"  required>
+                <label for="permanent">Permanent</label>
               </div>
               <div class="custom-control custom-radio">
-                <input id="paypal" name="paymentMethod" type="radio" required>
-                <label for="paypal">Contract</label>
+                <input value="contract" name="jobtype" type="radio" required>
+                <label for="contract">Contract</label>
               </div>
             </div>
             
-               <div class="custom-file">
-			    <input type="file" class="custom-file-input" id="pic">
-			    <label class="custom-file-label" for="customFile">Upload Profile Picture</label>
-			  </div>
+            <div class="form-group">
+			    <label for="profile">Upload profile picture</label>
+			    <input type="file" class="form-control-file" name="profile">
+			</div>
             
             <hr class="mb-4">
+            
             <button class="btn btn-primary" type="submit">Save</button>
           </form>
             

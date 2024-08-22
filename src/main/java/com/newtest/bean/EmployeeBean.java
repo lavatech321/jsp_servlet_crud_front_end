@@ -12,9 +12,11 @@ public class EmployeeBean {
 	private String country;
 	private String state;
 	private int zip;
-	private String status;
+	private int remote;
 	private String jobtype;
-	private Blob pic;
+	private Blob profile;
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -75,23 +77,23 @@ public class EmployeeBean {
 	public void setZip(int zip) {
 		this.zip = zip;
 	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
 	public String getJobtype() {
 		return jobtype;
 	}
 	public void setJobtype(String jobtype) {
 		this.jobtype = jobtype;
 	}
-	public Blob getPic() {
-		return pic;
+	public Blob getProfile() {
+		return profile;
 	}
-	public void setPic(Blob pic) {
-		this.pic = pic;
+	public void setProfile(Blob profile) {
+		this.profile = profile;
+	}
+	public int getRemote() {
+		return remote;
+	}
+	public void setRemote(int remote) {
+		this.remote = remote;
 	}
 	
 }

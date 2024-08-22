@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:web="http://xmlns.jcp.org/xml/ns/javaee">
   <display-name>Archetype Created Web Application</display-name>
-      <servlet>
-        <servlet-name>DatabaseInitServlet</servlet-name>
-        <servlet-class>com.newtest.utility.DatabaseInitServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>	
+  <servlet>
+    <servlet-name>DatabaseInitServlet</servlet-name>
+    <servlet-class>com.newtest.utility.DatabaseInitServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet>
+    <description></description>
+    <display-name>ViewImage</display-name>
+    <servlet-name>ViewImage</servlet-name>
+    <servlet-class>com.newtest.controller.ViewImage</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewImage</servlet-name>
+    <url-pattern>/ViewImage</url-pattern>
+  </servlet-mapping>
 </web-app>

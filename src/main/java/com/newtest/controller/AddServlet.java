@@ -1,5 +1,11 @@
 package com.newtest.controller;
 
+import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.http.Part;
+import javax.sql.rowset.serial.SerialBlob;
+import javax.sql.rowset.serial.SerialException;
+
+import java.sql.Blob;
 import com.newtest.model.*;
 import com.newtest.bean.*;
 import java.beans.beancontext.BeanContext;
@@ -7,18 +13,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
-
-import javax.sql.rowset.serial.SerialBlob;
-import javax.sql.rowset.serial.SerialException;
-
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.Part;
 
 import java.io.IOException;
 
@@ -28,15 +28,12 @@ public class AddServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		request.getRequestDispatcher("/WEB-INF/jsp/views/add.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		EmployeeBean bean = new EmployeeBean();
-        EmployeeModel model = new EmployeeModel();
-        
+		int id = EmployeeModel.computeID();
         String fname = request.getParameter("fname");
         String lname = request.getParameter("lname");
         String username = request.getParameter("username");
@@ -46,25 +43,14 @@ public class AddServlet extends HttpServlet {
         String country = request.getParameter("country");
         String state = request.getParameter("state");
         int zip = Integer.parseInt(request.getParameter("zip"));
-        String status = request.getParameter(request.getParameter("status1"));
-        String jobtype = request.getParameter(request.getParameter("credit"));
+        String remote = request.getParameter("remote");
+        String jobtype = request.getParameter("jobtype");
         
-        System.out.println(fname);
-        System.out.println(lname);
-        System.out.println(username);
-        System.out.println(email);
-        System.out.println(address);
-        System.out.println(phno);
-        System.out.println(country);
-        System.out.println(state);
-        System.out.println(zip);
-        System.out.println(status);
-        System.out.println(jobtype);
-        
+        // Get image
         Blob blob = null;
         Part filepart;
         try {
-            filepart = request.getPart("pic");
+            filepart = request.getPart("profile");
         
             InputStream inputStream = null;
         
@@ -82,27 +68,36 @@ public class AddServlet extends HttpServlet {
                 e.printStackTrace();
             }
             System.out.println(blob);
-            
-            bean.setFname(fname);
-            bean.setLname(lname);
-            bean.setUsername(username);
-            bean.setEmail(email);
-            bean.setAddress(address);
-            bean.setPhno(phno);
-            bean.setCountry(country);
-            bean.setState(state);
-            bean.setZip(zip);
-            bean.setStatus(status);
-            bean.setJobtype(jobtype);
-            bean.setPic(blob);
-            long pk = model.add(bean);
+            bean.setProfile(blob);
         } catch (Exception e) {
-        
             e.printStackTrace();
         }
-        System.out.println("Record added");
+        bean.setFname(fname);        
+        bean.setLname(lname);
+        bean.setUsername(username);
+        bean.setId(id);
+        bean.setEmail(email);
+        bean.setAddress(address);
+        bean.setPhno(phno);
+        bean.setCountry(country);
+        bean.setState(state);
+        bean.setZip(zip);
+        bean.setJobtype(jobtype);
+        if (remote == null ) {
+        	bean.setRemote(0);
+        }
+        else {
+        	bean.setRemote(1);
+        }
+        
+        long pk = EmployeeModel.add(bean);
+        if (pk == 1) {
+        	System.out.println("Record inserted successfully");
+        }
+        else {
+        	System.out.println("Record not inserted");
+        }
+        
         doGet(request, response);
-
 	}
-
 }

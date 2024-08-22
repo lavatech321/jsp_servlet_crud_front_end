@@ -1,5 +1,6 @@
 package com.newtest.bean;
 
+
 public class UserBean {
 	
 	private String username;
