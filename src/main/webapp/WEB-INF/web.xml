@@ -46,4 +46,24 @@
     <servlet-name>LogOutServlet</servlet-name>
     <url-pattern>/LogOutServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ForgotPasswordServlet</display-name>
+    <servlet-name>ForgotPasswordServlet</servlet-name>
+    <servlet-class>com.newtest.controller.ForgotPasswordServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ForgotPasswordServlet</servlet-name>
+    <url-pattern>/ForgotPasswordServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ResetPasswordServlet</display-name>
+    <servlet-name>ResetPasswordServlet</servlet-name>
+    <servlet-class>com.newtest.controller.ResetPasswordServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ResetPasswordServlet</servlet-name>
+    <url-pattern>/ResetPasswordServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

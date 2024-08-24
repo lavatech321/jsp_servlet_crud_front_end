@@ -99,6 +99,27 @@ public class UserModel {
         return result;
 	}
 	
+	public static int update(UserBean bean) {
+		try(Connection conn = JDBCDataSource.getConnection()) {
+				conn.setAutoCommit(false);
+	            PreparedStatement ps = conn.prepareStatement(
+	            		"update USERS set "
+	            		+ "password=? "
+	            		+ "where username=? "
+	            );
+	            ps.setString(1, bean.getPassword() );
+	            ps.setString(2, bean.getUsername() );
+	            int result = ps.executeUpdate();
+	            conn.commit();
+	            return result;
+			} 
+	        catch (Exception e) {
+	        	e.printStackTrace();
+	        	return 0;
+	        }
+	}
+	
+	
 	public static UserBean login(String username, String password) {
 		UserBean bean;
 		try (Connection conn = JDBCDataSource.getConnection();) {

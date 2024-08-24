@@ -1,12 +1,15 @@
 package com.newtest.controller;
 
 import com.newtest.bean.*;
+
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
 
 import com.newtest.model.UserModel;
 
@@ -23,7 +26,24 @@ public class EditUserServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		UserBean bean = new UserBean();
+        String password = request.getParameter("password");
+        String rpassword = request.getParameter("rpassword");
+		String username = request.getParameter("username");
+        String spassword;
+		
+        if (password.equals(rpassword)) {
+    			spassword = password;
+    			bean.setUsername(username);
+    			bean.setPassword(spassword);
+    			int result = UserModel.update(bean);
+    			System.out.println("Password updated successfully");
+    			response.sendRedirect("/newtest/home");
+    		}
+    	else {
+    			System.out.println("Password does not match");
+    			response.sendRedirect("/newtest/home");
+    	}
 	}
 
 }

@@ -1,5 +1,5 @@
   
-  <% 
+ <% 
 
   	session = request.getSession(false);
     if (session == null || session.getAttribute("user") == null) {

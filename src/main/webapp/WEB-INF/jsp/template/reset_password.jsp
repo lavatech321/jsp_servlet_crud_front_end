@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="https://getbootstrap.com/docs/4.0/assets/img/favicons/favicon.ico">
 
-    <title>Login</title>
+    <title>Reset Password</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/floating-labels/">
 
@@ -20,30 +20,30 @@
   </head>
 
   <body>
-    <form class="form-signin" method="post" action="/newtest/login">
+    <form class="form-signin" method="post" action="/newtest/reset_password">
       <div class="text-center mb-4">
         <!--  <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">  -->
-        <h1 class="h3 mb-3 font-weight-normal">Lavatech Technology</h1>
+        <h1 class="h3 mb-3 font-weight-normal">Reset Password</h1>
       </div>
 
+		<input type="hidden" name="token" value="${param.token}">
+	
+		<div class="form-label-group">
+		<input type="text" value="${param.username}" class="form-control"  name="username" readonly>
+        	<label>Username</label>
+      	</div>
+	
       <div class="form-label-group">
-        <input type="text" class="form-control" placeholder="username" name="username" required autofocus>
-        <label for="inputEmail">Username</label>
+        <input type="password" class="form-control" placeholder="password" name="password" required autofocus>
+        <label>Enter new password</label>
       </div>
-
+      
       <div class="form-label-group">
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required>
-        <label for="inputPassword">Password</label>
+        <input type="password" class="form-control" placeholder="password" name="rpassword" required autofocus>
+        <label>Re-enter new password</label>
       </div>
 
-      <div class="checkbox mb-3">
-        <label>
-          <input type="checkbox" value="remember-me"> Remember me
-        </label>
-      </div>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
-      <a href="/newtest/forgot_password">Forgot Password?</a>
-      <p class="mt-5 mb-3 text-muted text-center">&copy; 2024-2025</p>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Reset Password</button>
     </form>
   </body>
 </html>
