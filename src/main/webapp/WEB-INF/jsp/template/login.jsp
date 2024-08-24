@@ -20,20 +20,19 @@
   </head>
 
   <body>
-    <form class="form-signin">
+    <form class="form-signin" method="post" action="/newtest/login">
       <div class="text-center mb-4">
-        <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-        <h1 class="h3 mb-3 font-weight-normal">Floating labels</h1>
-        <p>Build form controls with floating labels via the <code>:placeholder-shown</code> pseudo-element. <a href="https://caniuse.com/#feat=css-placeholder-shown">Works in latest Chrome, Safari, and Firefox.</a></p>
+        <!--  <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">  -->
+        <h1 class="h3 mb-3 font-weight-normal">Lavatech Technology</h1>
       </div>
 
       <div class="form-label-group">
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-        <label for="inputEmail">Email address</label>
+        <input type="text" class="form-control" placeholder="username" name="username" required autofocus>
+        <label for="inputEmail">Username</label>
       </div>
 
       <div class="form-label-group">
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required>
         <label for="inputPassword">Password</label>
       </div>
 
@@ -42,7 +41,8 @@
           <input type="checkbox" value="remember-me"> Remember me
         </label>
       </div>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+      <a href="">Forgot Password?</a>
       <p class="mt-5 mb-3 text-muted text-center">&copy; 2024-2025</p>
     </form>
   </body>

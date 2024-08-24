@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS EMPLOYEE (
-	id INT,
+	id INT PRIMARY KEY,
 	fname VARCHAR(35),
 	lname VARCHAR(35),
 	username VARCHAR(35),
@@ -13,9 +13,9 @@ CREATE TABLE IF NOT EXISTS EMPLOYEE (
 	jobtype VARCHAR(15),
 	profile BLOB
 	);
-CREATE TABLE IF NOT EXISTS users (
-	id INT AUTO_INCREMENT PRIMARY KEY, 
+CREATE TABLE IF NOT EXISTS USERS (
+	id INT PRIMARY KEY, 
 	username VARCHAR(20) NOT NULL,
 	password VARCHAR(20) NOT NULL
 	);
-insert into users values(1,"admin","admin");
+insert into USERS values(1,"admin","admin");

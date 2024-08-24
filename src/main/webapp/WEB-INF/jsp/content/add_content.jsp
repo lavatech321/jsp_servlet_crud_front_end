@@ -1,4 +1,17 @@
   
+  <% 
+
+  	session = request.getSession(false);
+    if (session == null || session.getAttribute("user") == null) {
+  %>
+  
+    	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        <h4 class="h4">Please Login or Sign in to continue.</h4>
+		</div>
+  <%	
+    }
+    else {
+%>
   
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
             <h1 class="h2">New Employee</h1>
@@ -124,4 +137,5 @@
             
             <hr class="mb-4">
 </div>
-        
+  
+  <% } %>      

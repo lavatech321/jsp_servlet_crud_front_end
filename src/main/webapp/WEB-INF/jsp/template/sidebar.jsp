@@ -2,7 +2,7 @@
           <div class="sidebar-sticky">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link active" href="<%= request.getContextPath() %>/add">
+                <a class="nav-link" href="<%= request.getContextPath() %>/add">
                   <span data-feather="home"></span>
                   Add Employee <span class="sr-only">(current)</span>
                 </a>
