@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import com.newtest.bean.EmployeeBean;
 import com.newtest.model.EmployeeModel;
+import com.newtest.utility.ServletUtility;
 
 @WebServlet(name="delete",urlPatterns="/delete")
 public class DeleteServlet extends HttpServlet {
@@ -23,6 +24,9 @@ public class DeleteServlet extends HttpServlet {
 			EmployeeBean b1 =  EmployeeModel.viewEmp(id);
 			request.setAttribute("b1", b1);
 		}
+		else {
+			request.setAttribute("b1", null);
+		}
 		ArrayList l1 = EmployeeModel.listID();
 		request.setAttribute("list", l1);
     	request.getRequestDispatcher("/WEB-INF/jsp/views/delete.jsp").forward(request, response);
@@ -31,8 +35,12 @@ public class DeleteServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int result = EmployeeModel.delete( Integer.parseInt(request.getParameter("eid")));
-		EmployeeBean b1 = null;
-		request.setAttribute("b1", b1);
-		response.sendRedirect("/newtest/delete");
+		if (result == 1) {
+            ServletUtility.setSuccessMessage("Employee record deleted sucsessfully!", request);
+        }
+        else {
+            ServletUtility.setErrorMessage("Employee record not deleted!", request);
+        }
+		doGet(request,response);
 	}
 }

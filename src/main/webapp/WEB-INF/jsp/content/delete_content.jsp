@@ -1,20 +1,19 @@
-
+<%@page import="com.newtest.utility.ServletUtility"%>
 <%@ page import="java.util.*" %>
 <%@ page import="com.newtest.bean.*" %>
 
-<% 
-
+	<% 
   	session = request.getSession(false);
     if (session == null || session.getAttribute("user") == null) {
-  %>
+  	%>
   
     	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
         <h4 class="h4">Please Login or Sign in to continue.</h4>
 		</div>
-  <%	
+  	<%	
     }
-    else {
-%>
+    	else {
+	%>
 
 
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
@@ -39,16 +38,36 @@
             
   </div>
   
+  <% if ( ! ServletUtility.getSuccessMessage(request).equals("") ) { %>
+        
+	        <div class="alert alert-success">
+			  <%=ServletUtility.getSuccessMessage(request)%>
+			</div>
+	        
+	    <% } %>
+	     
+	     <% if ( !ServletUtility.getErrorMessage(request).equals("") ) { %>
+	        
+	        <div class="alert alert-danger">
+			  <%=ServletUtility.getErrorMessage(request)%>
+			</div>
+		
+		<% } %>
+		
+  		
+  
   
   	<% 
   	// <jsp:useBean id="b1" class="com.newtest.bean.EmployeeBean" scope="request"></jsp:useBean>  	
   	// Not needed below as we have used jsp:useBean
-  	EmployeeBean b1 = (EmployeeBean) request.getAttribute("b1");
-  	if( b1 != null) {
-  		
+  	
+  	if( request.getAttribute("b1") != null) {
+  		EmployeeBean b1 = (EmployeeBean) request.getAttribute("b1");	
   	%>
   	  		
   		<div class="col-md-8 order-md-1">
+  		
+  		
 	    <form class="needs-validation" novalidate method="post" action="/newtest/delete">
 	      
 	      <img src="/newtest/image?eid=<%=b1.getId()%>"
