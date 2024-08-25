@@ -1,5 +1,6 @@
 package com.newtest.controller;
 
+import com.newtest.utility.*;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.Part;
 import javax.sql.rowset.serial.SerialBlob;
@@ -33,18 +34,63 @@ public class AddServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		EmployeeBean bean = new EmployeeBean();
+		String fname, lname, username, email, phno;
+		int zip;
 		int id = EmployeeModel.computeID();
-        String fname = request.getParameter("fname");
-        String lname = request.getParameter("lname");
-        String username = request.getParameter("username");
-        String email = request.getParameter("email");
-        String address = request.getParameter("address");
-        String phno = request.getParameter("phno");
-        String country = request.getParameter("country");
-        String state = request.getParameter("state");
-        int zip = Integer.parseInt(request.getParameter("zip"));
-        String remote = request.getParameter("remote");
-        String jobtype = request.getParameter("jobtype");
+		
+		if ( DataValidator.isFname(request.getParameter("fname")) ) {
+			fname = request.getParameter("fname");
+			bean.setFname(fname);
+		}
+		else {
+			ServletUtility.setErrorMessage("Invalid first name!", request);
+		    request.getRequestDispatcher("/WEB-INF/jsp/views/add.jsp").forward(request, response);
+		}
+		
+		if ( DataValidator.isLname(request.getParameter("lname")) ) {
+			lname = request.getParameter("lname");
+			bean.setLname(lname);
+		}
+		else {
+			ServletUtility.setErrorMessage("Invalid last name!", request);
+		    request.getRequestDispatcher("/WEB-INF/jsp/views/add.jsp").forward(request, response);
+		}
+		
+		if ( DataValidator.isUsername(request.getParameter("username")) ) {
+			username = request.getParameter("username");
+			bean.setUsername(username);
+		}
+		else {
+			ServletUtility.setErrorMessage("Invalid username!", request);
+		    request.getRequestDispatcher("/WEB-INF/jsp/views/add.jsp").forward(request, response);
+		}
+		
+		if ( DataValidator.isEmail(request.getParameter("email")) ) {
+			email = request.getParameter("email");
+			bean.setEmail(email);
+		}
+		else {
+			ServletUtility.setErrorMessage("Invalid email!", request);
+		    request.getRequestDispatcher("/WEB-INF/jsp/views/add.jsp").forward(request, response);
+		}
+		
+		if ( DataValidator.isPhno(request.getParameter("phno")) ) {
+			phno = request.getParameter("phno");
+			bean.setPhno(phno);
+		}
+		else {
+			ServletUtility.setErrorMessage("Invalid Phone number!", request);
+		    request.getRequestDispatcher("/WEB-INF/jsp/views/add.jsp").forward(request, response);
+		}
+        
+        if ( DataValidator.isZip(Integer.parseInt(request.getParameter("zip"))) ) {
+			zip = Integer.parseInt(request.getParameter("zip"));
+			bean.setZip(zip);
+		}
+		else {
+			ServletUtility.setErrorMessage("Invalid zip code!", request);
+		    request.getRequestDispatcher("/WEB-INF/jsp/views/add.jsp").forward(request, response);
+		}
         
         // Get image
         Blob blob = null;
@@ -56,32 +102,29 @@ public class AddServlet extends HttpServlet {
         
             inputStream = filepart.getInputStream();
             byte[] b = new byte[inputStream.available()];
-            System.out.println(b);
             inputStream.read(b);
             try {
                 blob = new SerialBlob(b);
-            } catch (SerialException e) {
-                
-                e.printStackTrace();
-            } catch (SQLException e) {
-                
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-            System.out.println(blob);
             bean.setProfile(blob);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        bean.setFname(fname);        
-        bean.setLname(lname);
-        bean.setUsername(username);
+
         bean.setId(id);
-        bean.setEmail(email);
+        
+        String address = request.getParameter("address");
         bean.setAddress(address);
-        bean.setPhno(phno);
+
+        String country = request.getParameter("country");
+        String state = request.getParameter("state");
         bean.setCountry(country);
         bean.setState(state);
-        bean.setZip(zip);
+        
+        String remote = request.getParameter("remote");
+        String jobtype = request.getParameter("jobtype");
         bean.setJobtype(jobtype);
         if (remote == null ) {
         	bean.setRemote(0);
@@ -92,12 +135,11 @@ public class AddServlet extends HttpServlet {
         
         long pk = EmployeeModel.add(bean);
         if (pk == 1) {
-        	System.out.println("Record inserted successfully");
+            ServletUtility.setSuccessMessage("Employee record added sucsessfully!", request);
         }
         else {
-        	System.out.println("Record not inserted");
+            ServletUtility.setErrorMessage("Employee record not added successfully!", request);
         }
-        
-        doGet(request, response);
+        request.getRequestDispatcher("/WEB-INF/jsp/views/add.jsp").forward(request, response);
 	}
 }

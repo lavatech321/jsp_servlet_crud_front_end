@@ -31,7 +31,6 @@ public class EditUserServlet extends HttpServlet {
         String rpassword = request.getParameter("rpassword");
 		String username = request.getParameter("username");
         String spassword;
-		
         if (password.equals(rpassword)) {
     			spassword = password;
     			bean.setUsername(username);
@@ -45,5 +44,4 @@ public class EditUserServlet extends HttpServlet {
     			response.sendRedirect("/newtest/home");
     	}
 	}
-
 }

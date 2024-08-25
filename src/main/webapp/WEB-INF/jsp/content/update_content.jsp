@@ -1,4 +1,4 @@
-
+<%@page import="com.newtest.utility.ServletUtility"%>
 <%@ page import="java.util.*" %>
 <%@ page import="com.newtest.bean.*" %>
 
@@ -38,6 +38,24 @@
             
   </div>
   
+  <div class="col-md-8 order-md-1">
+  <% if ( ! ServletUtility.getSuccessMessage(request).equals("") ) { %>
+        
+	        <div class="alert alert-success">
+			  <%=ServletUtility.getSuccessMessage(request)%>
+			</div>
+	        
+	    <% } %>
+	     
+	     <% if ( !ServletUtility.getErrorMessage(request).equals("") ) { %>
+	        
+	        <div class="alert alert-danger">
+			  <%=ServletUtility.getErrorMessage(request)%>
+			</div>
+		
+	<% } %>
+	</div>
+		
   
   	<% 
   	// <jsp:useBean id="b1" class="com.newtest.bean.EmployeeBean" scope="request"></jsp:useBean>  	
@@ -64,7 +82,7 @@
 	      <div class="row">
 	      <div class="col-md-4 mb-3">
 	          <label for="firstName">Employee ID</label>
-	          <input type="text" class="form-control" value="<% out.println(b1.getId()); %>" name="updateid">
+	          <input type="text" class="form-control" value="<% out.println(b1.getId()); %>" readonly name="updateid">
 	        </div>
 	        <div class="col-md-4 mb-3">	        
 	          <label for="firstName">First name</label>

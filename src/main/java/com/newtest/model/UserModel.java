@@ -99,6 +99,25 @@ public class UserModel {
         return result;
 	}
 	
+	public static int checkUsername(String username) {
+		int result;
+        try (Connection conn = JDBCDataSource.getConnection();) {
+            conn.setAutoCommit(false);
+            PreparedStatement ps = conn.prepareStatement("select id from USERS where username=?");
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+            	return 1;
+            }
+            conn.commit();
+            ps.close();
+        } 
+        catch (Exception e) {
+        	e.printStackTrace();
+        }
+		return 0;
+	}
+	
 	public static int update(UserBean bean) {
 		try(Connection conn = JDBCDataSource.getConnection()) {
 				conn.setAutoCommit(false);

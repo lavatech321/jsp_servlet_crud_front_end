@@ -1,38 +1,50 @@
+<%@page import="com.newtest.utility.ServletUtility"%>
   
- <% 
-
-  	session = request.getSession(false);
-    if (session == null || session.getAttribute("user") == null) {
-  %>
+ 	<% 
+	  	session = request.getSession(false);
+	    if (session == null || session.getAttribute("user") == null) {
+ 	%>
   
     	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
         <h4 class="h4">Please Login or Sign in to continue.</h4>
 		</div>
-  <%	
-    }
-    else {
-%>
+  	<%	
+	    }
+	    else {
+	%>
   
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
             <h1 class="h2">New Employee</h1>
   </div>
   
         <div class="col-md-8 order-md-1">
-          <form action="/newtest/add" method="post" enctype="multipart/form-data">
+        
+        <% if ( ! ServletUtility.getSuccessMessage(request).equals("") ) { %>
+        
+	        <div class="alert alert-success">
+			  <%=ServletUtility.getSuccessMessage(request)%>
+			</div>
+	        
+	    <% } %>
+	     
+	     <% if ( !ServletUtility.getErrorMessage(request).equals("") ) { %>
+	        
+	        <div class="alert alert-danger">
+			  <%=ServletUtility.getErrorMessage(request)%>
+			</div>
+		
+		<% } %>
+		        
+        <form action="/newtest/add" method="post" enctype="multipart/form-data">
+            
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="firstName">First name</label>
                 <input type="text" class="form-control" name="fname" >
-                <div class="invalid-feedback">
-                  Valid first name is required.
-                </div>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="lastName">Last name</label>
                 <input type="text" class="form-control" name="lname">
-                <div class="invalid-feedback">
-                  Valid last name is required.
-                </div>
               </div>
             </div>
             
@@ -43,26 +55,17 @@
                   <span class="input-group-text">@</span>
                 </div>
                 <input type="text" class="form-control" name="username">
-                <div class="invalid-feedback" style="width: 100%;">
-                  Your username is required.
-                </div>
               </div>
             </div>
 
 			<div class="mb-3">
               <label for="email">Email <span class="text-muted">(Optional)</span></label>
               <input type="email" class="form-control" name="email" placeholder="you@example.com">
-              <div class="invalid-feedback">
-                Please enter a valid email address for shipping updates.
-              </div>
             </div>
 
             <div class="mb-3">
               <label for="address">Address</label>
               <input type="text" class="form-control" name="address" placeholder="1234 Main St">
-              <div class="invalid-feedback">
-                Please enter your shipping address.
-              </div>
             </div>
 
             <div class="mb-3">
@@ -87,9 +90,6 @@
                   <option value="MAH">MAH</option>
                   <option value="DELHI">DELHI</option>
                 </select>
-                <div class="invalid-feedback">
-                  Please provide a valid state.
-                </div>
               </div>
               <div class="col-md-3 mb-3">
                 <label for="zip">Zip</label>
@@ -136,6 +136,6 @@
           </form>
             
             <hr class="mb-4">
-</div>
+	</div>
   
   <% } %>      

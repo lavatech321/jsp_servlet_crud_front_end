@@ -1,5 +1,6 @@
 package com.newtest.controller;
 
+import com.newtest.model.*;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -21,6 +22,9 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import com.newtest.utility.DataValidator;
+import com.newtest.utility.ServletUtility;
+
 @WebServlet(name="forgot_password", urlPatterns="/forgot_password")
 public class ForgotPasswordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -30,8 +34,24 @@ public class ForgotPasswordServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String username = request.getParameter("username");
-        String email = request.getParameter("email");        
+		
+		String username="", email="";
+		if ( DataValidator.isUsername(request.getParameter("username")) ) {
+			username = request.getParameter("username");
+		}
+		else {
+			ServletUtility.setErrorMessage("Invalid username!", request);
+			request.getRequestDispatcher("/WEB-INF/jsp/template/forgot_password.jsp").forward(request, response);
+		}
+		
+		if ( DataValidator.isEmail(request.getParameter("email")) ) {
+			email = request.getParameter("email");
+		}
+		else {
+			ServletUtility.setErrorMessage("Invalid Email address!", request);
+			request.getRequestDispatcher("/WEB-INF/jsp/template/forgot_password.jsp").forward(request, response);
+		}
+		
         
         Map<String, String> tokenStorage = new HashMap<>();
         ServletContext context = getServletContext();
@@ -41,7 +61,16 @@ public class ForgotPasswordServlet extends HttpServlet {
         context.setAttribute("tokenStorage", tokenStorage);
         
         String resetLink = "http://localhost:8084/newtest/reset_password?token="+token+"&username="+username;
-        sendEmail(email, resetLink, username);
+        
+        int result = UserModel.checkUsername(username);
+        if (result == 1) {
+        	sendEmail(email, resetLink, username);
+        	ServletUtility.setSuccessMessage("Password reset link sent successfully, please check your email!", request);
+        }
+        else {
+        	ServletUtility.setErrorMessage("Username does not exists in database!", request);
+			request.getRequestDispatcher("/WEB-INF/jsp/template/forgot_password.jsp").forward(request, response);
+        }
 		request.getRequestDispatcher("/WEB-INF/jsp/template/forgot_password.jsp").forward(request, response);
 	}
 	
@@ -62,7 +91,6 @@ public class ForgotPasswordServlet extends HttpServlet {
             }
         });
         try {
-            // Create a default MimeMessage object.
             MimeMessage message = new MimeMessage(session);
 
             // Set From: header field of the header.

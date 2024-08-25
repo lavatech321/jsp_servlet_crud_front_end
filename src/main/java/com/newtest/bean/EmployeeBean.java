@@ -1,4 +1,5 @@
 package com.newtest.bean;
+import java.io.InputStream;
 import java.sql.Blob;
 
 public class EmployeeBean {

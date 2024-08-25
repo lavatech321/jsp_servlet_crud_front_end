@@ -1,5 +1,6 @@
 package com.newtest.controller;
 
+import com.newtest.utility.*;
 import com.newtest.bean.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -20,22 +21,43 @@ public class AddUserServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
-		String rpassword = request.getParameter("rpassword");
-		String spassword;
-		if (password.equals(rpassword)) {
-			spassword = password;
-		}
-		else {
-			System.out.println("Password does not match");
-		}
+		String username="", password="", rpassword=request.getParameter("rpassword");
 		int id = UserModel.computeID();
 		UserBean bean = new UserBean();
+		
+		if ( DataValidator.isUsername(request.getParameter("username")) ) {
+			username = request.getParameter("username");
+			bean.setUsername(username);
+		}
+		else {
+			ServletUtility.setErrorMessage("Invalid username!", request);
+			doGet(request, response);
+		}
+		
+		if ( DataValidator.isPassword(request.getParameter("password"))  ) {
+			password = request.getParameter("password");
+		}
+		else {
+			ServletUtility.setErrorMessage("Invalid password!", request);
+			doGet(request, response);
+		}
+		
+		if (password.equals(rpassword)) {
+			bean.setPassword(password);
+		}
+		else {
+			ServletUtility.setErrorMessage("Password does not match!", request);
+			doGet(request, response);
+		}
+		
 		bean.setId(id);
-		bean.setUsername(username);
-		bean.setPassword(password);
 		int result = UserModel.addUser(bean);
+		if (result == 1) {
+            ServletUtility.setSuccessMessage("User record added sucsessfully!", request);
+        }
+        else {
+            ServletUtility.setErrorMessage("User record not added successfully!", request);
+        }
 		doGet(request, response);
 	}
 }

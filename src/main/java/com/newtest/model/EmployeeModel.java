@@ -31,7 +31,6 @@ public class EmployeeModel {
 	            Statement stat = conn.createStatement();) {
 				String q1 = "delete from EMPLOYEE where id="+eid;
 				int result = stat.executeUpdate(q1);
-				System.out.println("Result is:"+result);
 				return result; // 1 if delete, 0 if not delete
 			}
 			catch (Exception e) {
@@ -50,7 +49,7 @@ public class EmployeeModel {
 	public static int update(EmployeeBean bean) {
 		try(Connection conn = JDBCDataSource.getConnection()) {
 				conn.setAutoCommit(false);
-	            PreparedStatement ps = conn.prepareStatement(
+				PreparedStatement ps = conn.prepareStatement(
 	            		"update EMPLOYEE set "
 	            		+ "fname=? ,"
 	            		+ "lname=? ,"
@@ -66,23 +65,56 @@ public class EmployeeModel {
 	            		+ "profile=? "
 	            		+ "where id=? "
 	            );
-	            ps.setString(1, bean.getFname() );
-	            ps.setString(2, bean.getLname() );
-	            ps.setString(3, bean.getUsername() );
-	            ps.setString(4, bean.getEmail() );
-	            ps.setString(5, bean.getAddress() );
-	            ps.setString(6, bean.getPhno() );
-	            ps.setString(7, bean.getCountry() );
-	            ps.setString(8, bean.getState() );
-	            ps.setInt(9, bean.getRemote() );
-	            ps.setInt(10, bean.getZip() );
-	            ps.setString(11, bean.getJobtype() );
-	            System.out.println(bean.getProfile());
-	            ps.setBlob(12, bean.getProfile());
-	            ps.setInt(13, bean.getId() );
-	            int result = ps.executeUpdate();
-	            conn.commit();
-	            return result;
+				PreparedStatement ps1 = conn.prepareStatement(
+	            		"update EMPLOYEE set "
+	            		+ "fname=? ,"
+	            		+ "lname=? ,"
+	            		+ "username=? ,"
+	            		+ "email=? ,"
+	            		+ "address=? ,"
+	            		+ "phno=? ,"
+	            		+ "country=? ,"
+	            		+ "state=? ,"
+	            		+ "remote=? ,"
+	            		+ "zip=? ,"
+	            		+ "jobtype=? "
+	            		+ "where id=? "
+	            );
+		        if (bean.getProfile() != null) {
+		        	ps.setString(1, bean.getFname() );
+		            ps.setString(2, bean.getLname() );
+		            ps.setString(3, bean.getUsername() );
+		            ps.setString(4, bean.getEmail() );
+		            ps.setString(5, bean.getAddress() );
+		            ps.setString(6, bean.getPhno() );
+		            ps.setString(7, bean.getCountry() );
+		            ps.setString(8, bean.getState() );
+		            ps.setInt(9, bean.getRemote() );
+		            ps.setInt(10, bean.getZip() );
+		            ps.setString(11, bean.getJobtype() );
+		            ps.setBlob(12, bean.getProfile());
+		            ps.setInt(13, bean.getId() );
+		            int result = ps.executeUpdate();
+		            conn.commit();
+		            return result;
+		        }
+		        else {
+		        	ps1.setString(1, bean.getFname() );
+		            ps1.setString(2, bean.getLname() );
+		            ps1.setString(3, bean.getUsername() );
+		            ps1.setString(4, bean.getEmail() );
+		            ps1.setString(5, bean.getAddress() );
+		            ps1.setString(6, bean.getPhno() );
+		            ps1.setString(7, bean.getCountry() );
+		            ps1.setString(8, bean.getState() );
+		            ps1.setInt(9, bean.getRemote() );
+		            ps1.setInt(10, bean.getZip() );
+		            ps1.setString(11, bean.getJobtype() );
+		            ps1.setInt(12, bean.getId());
+		            int result = ps1.executeUpdate();
+		            conn.commit();
+		            return result;
+		        }
 			} 
 	        catch (Exception e) {
 	        	e.printStackTrace();
@@ -182,7 +214,4 @@ public class EmployeeModel {
 		}
     }
     
-    //public static void main(String[] args) {
-    //	System.out.println(EmployeeModel.computeID());
-    //}
 }

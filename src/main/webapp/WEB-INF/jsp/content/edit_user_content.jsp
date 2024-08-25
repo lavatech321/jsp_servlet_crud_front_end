@@ -23,7 +23,7 @@
           <form class="needs-validation" novalidate method="post" action="/newtest/edituser">
             
             <div class="mb-3">
-              <label for="email">Email</label>
+              <label for="email">Username</label>
               <input type="text" class="form-control" name="username" value=<%= bean.getUsername() %> readonly >
               <div class="invalid-feedback">
                 Please enter a valid email address.
