@@ -2,6 +2,7 @@ package com.newtest.controller;
 
 import com.newtest.bean.*;
 import com.newtest.model.UserModel;
+import com.newtest.utility.ServletUtility;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -35,6 +36,7 @@ public class LoginServlet extends HttpServlet {
 			response.sendRedirect("/newtest/home");
 	    }
 		else {
+			ServletUtility.setErrorMessage("Invalid Username or Password!", request);
 			request.getRequestDispatcher("/WEB-INF/jsp/views/login.jsp").forward(request, response);
 		}
 	}

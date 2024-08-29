@@ -1,4 +1,4 @@
-
+<%@page import="com.newtest.utility.ServletUtility"%>
 <!doctype html>
 <html lang="en">
   <head>
@@ -20,7 +20,28 @@
   </head>
 
   <body>
+  
+  		
+  
     <form class="form-signin" method="post" action="/newtest/login">
+    
+    <% if ( ! ServletUtility.getSuccessMessage(request).equals("") ) { %>
+        
+	        <div class="alert alert-success">
+			  <%=ServletUtility.getSuccessMessage(request)%>
+			</div>
+	        
+	    <% } %>
+	     
+	     <% if ( !ServletUtility.getErrorMessage(request).equals("") ) { %>
+	        
+	        <div class="alert alert-danger">
+			  <%=ServletUtility.getErrorMessage(request)%>
+			</div>
+		
+	<% } %>
+	
+    
       <div class="text-center mb-4">
         <!--  <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">  -->
         <h1 class="h3 mb-3 font-weight-normal">Lavatech Technology</h1>
